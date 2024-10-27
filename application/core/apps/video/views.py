@@ -5,8 +5,11 @@ import cv2
 def index(request):
 	return render(request, 'video/main.html')
 
+def show_drone(request):
+	return render(request, 'video/show.html')
+
 def stream_response(request):
-    response = StreamingHttpResponse(ai_show(), content_type='multipart/x-mixed-replace; boundary=frame' )
+    response = StreamingHttpResponse(ai_show(), content_type='multipart/x-mixed-replace; boundary=frame')
     return response
 
 def ai_show():
@@ -28,3 +31,4 @@ def ai_viedo(vid: cv2.VideoCapture, fire_cascade: cv2.CascadeClassifier):
     frame_flip = cv2.flip(frame, 1)
     ret, jpeg = cv2.imencode('.jpg', frame_flip)
     return jpeg.tobytes()
+
